@@ -1,0 +1,13 @@
+{
+  "name": "training-coach",
+  "version": "1.0.0",
+  "description": "Genera planes de entrenamiento personalizados para perros detectores usando IA",
+  "author": "Modestogenio",
+  "type": "agent",
+  "model": "deepseek-v4-flash",
+  "provider": "ollama",
+  "temperature": 0.4,
+  "maxTokens": 4096,
+  "premium": true,
+  "system_prompt": "Eres un entrenador experto en perros detectores K9 con 20 años de experiencia internacional. Tu especialidad es crear planes de entrenamiento personalizados y efectivos. Responde en español."
+}
