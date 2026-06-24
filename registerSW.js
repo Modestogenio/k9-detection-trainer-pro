@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/k9-detection-trainer-pro/sw.js', { scope: '/k9-detection-trainer-pro/' })})}
