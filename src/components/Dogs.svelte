@@ -3,10 +3,12 @@
   import { getAllDogs, deleteDog, DOG_BREEDS, DOG_LEVELS, DOG_SPECIALTIES, addDog, updateDog, getDog } from '../lib/db.js'
   import Modal from './Modal.svelte'
 
+  let { navigate } = $props()
+
   let dogs = $state([])
   let showModal = $state(false)
   let editing = $state(null)
-  let form = $state({ name: '', breed: 'Pastor Belga Malinois', level: 'básico', specialty: 'explosivos', age: '', notes: '' })
+  let form = $state({ name: '', breed: 'Pastor Belga Malinois', level: 'básico', specialty: 'explosivos', age: '', weight: '', notes: '' })
   let dogDetail = $state(null)
 
   onMount(async () => { dogs = await getAllDogs() })
@@ -15,21 +17,22 @@
 
   function openAdd() {
     editing = null
-    form = { name: '', breed: 'Pastor Belga Malinois', level: 'básico', specialty: 'explosivos', age: '', notes: '' }
+    form = { name: '', breed: 'Pastor Belga Malinois', level: 'básico', specialty: 'explosivos', age: '', weight: '', notes: '' }
     showModal = true
   }
 
   function openEdit(dog) {
     editing = dog.id
-    form = { name: dog.name, breed: dog.breed, level: dog.level, specialty: dog.specialty, age: dog.age || '', notes: dog.notes || '' }
+    form = { name: dog.name, breed: dog.breed, level: dog.level, specialty: dog.specialty, age: dog.age || '', weight: dog.weight || '', notes: dog.notes || '' }
     showModal = true
   }
 
   async function handleSubmit() {
+    const data = { ...form, age: form.age ? Number(form.age) : null, weight: form.weight ? Number(form.weight) : null }
     if (editing) {
-      await updateDog(editing, form)
+      await updateDog(editing, data)
     } else {
-      await addDog({ ...form, age: form.age ? Number(form.age) : null })
+      await addDog(data)
     }
     showModal = false
     await refresh()
@@ -102,9 +105,10 @@
         <div class="progress-fill" style="width:{acc}%"></div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-sm btn-pro" onclick={() => navigate('dog-dashboard', dog.id)}>📊 Dashboard</button>
         <button class="btn btn-sm btn-info" onclick={() => viewDetail(dog.id)}>📖 Ver</button>
         <button class="btn btn-sm btn-primary" onclick={() => openEdit(dog)}>✏️ Editar</button>
-        <button class="btn btn-sm btn-pro" onclick={() => exportDogPDF(dog.id)}>📄 PDF</button>
+        <button class="btn btn-sm btn-primary" onclick={() => exportDogPDF(dog.id)}>📄 PDF</button>
         <button class="btn btn-sm btn-danger" onclick={() => handleDelete(dog.id)}>🗑️</button>
       </div>
     </div>
@@ -172,9 +176,15 @@
           {#each DOG_SPECIALTIES as s}<option value={s}>{s}</option>{/each}
         </select>
       </div>
-      <div class="form-group">
-        <label>Edad (años)</label>
-        <input bind:value={form.age} type="number" min="0" step="0.5" placeholder="Ej: 3">
+      <div class="grid-2" style="margin-bottom:0">
+        <div class="form-group">
+          <label>Edad (años)</label>
+          <input bind:value={form.age} type="number" min="0" step="0.5" placeholder="Ej: 3">
+        </div>
+        <div class="form-group">
+          <label>Peso (kg)</label>
+          <input bind:value={form.weight} type="number" min="0" step="0.5" placeholder="Ej: 28">
+        </div>
       </div>
       <div class="form-group">
         <label>Notas</label>
