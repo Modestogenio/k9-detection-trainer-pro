@@ -14,6 +14,10 @@ Construida con **Svelte 5 + Chart.js + Dexie.js + PWA + jsPDF**.
 | Registro de sesiones | ✅ | ✅ |
 | Estadísticas básicas | ✅ | ✅ |
 | **Gráficos Chart.js** | ❌ | ✅ |
+| **Dashboard individual por perro** | ❌ | ✅ |
+| **Tendencia de rendimiento (mejora/declinación)** | ❌ | ✅ |
+| **Dominio de olores (radar chart + nivel)** | ❌ | ✅ |
+| **Recomendaciones por peso, raza, edad y resultados** | ❌ | ✅ |
 | **Exportación PDF** | ❌ | ✅ |
 | **PWA (instalar en celular)** | ❌ | ✅ |
 | **Base de datos IndexedDB** | ❌ | ✅ |
@@ -22,7 +26,7 @@ Construida con **Svelte 5 + Chart.js + Dexie.js + PWA + jsPDF**.
 
 ## 🚀 Demo
 
-👉 **[k9-pro.vercel.app](https://Modestogenio.github.io/k9-detection-trainer-pro)** 
+👉 **[Modestogenio.github.io/k9-detection-trainer-pro](https://Modestogenio.github.io/k9-detection-trainer-pro)** 
 
 ## 🧠 Stack Tecnológico
 
