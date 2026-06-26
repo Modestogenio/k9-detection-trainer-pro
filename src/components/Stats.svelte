@@ -44,8 +44,8 @@
   }
 </script>
 
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-  <h2>📊 Estadísticas Pro</h2>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+  <h2 class="section-title" style="margin-bottom:0">📊 Estadísticas Pro</h2>
   <button class="btn btn-pro" onclick={exportOverallPDF}>📄 Exportar PDF General</button>
 </div>
 
@@ -65,11 +65,11 @@
 </div>
 
 <div class="card card-pro" style="text-align:center">
-  <h3 style="color:var(--accent)">🤖 Agente AI Training Coach</h3>
-  <p style="color:var(--text2);font-size:0.9rem;margin:8px 0">
+  <h3 style="color:var(--accent);font-size:1.1rem;font-weight:700">🤖 Agente AI Training Coach</h3>
+  <p style="color:var(--text3);font-size:0.9rem;margin:10px auto;max-width:500px;line-height:1.7">
     Los sponsors Pro obtienen planes de entrenamiento personalizados generados por IA (DeepSeek V4 Flash + Ollama).
   </p>
-  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
     <a href="https://github.com/sponsors/Modestogenio" target="_blank" class="btn btn-pro">⭐ Sponsor Pro $10/mes</a>
     <a href="https://paypal.me/marcelocorales" target="_blank" class="btn btn-success">☕ Donar</a>
   </div>
@@ -81,23 +81,25 @@
     {@const total = dog.hits + dog.misses}
     {@const acc = total > 0 ? Math.round((dog.hits / total) * 100) : 0}
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
         <div class="dog-avatar">🐕</div>
-        <div style="flex:1">
-          <strong style="font-size:1.1rem">{dog.name}</strong>
-          <span class="badge badge-accent" style="margin-left:6px">{dog.level}</span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <strong style="font-size:1.1rem">{dog.name}</strong>
+            <span class="badge badge-accent">{dog.level}</span>
+          </div>
         </div>
-        <div style="text-align:right">
-          <span style="font-size:1.5rem;font-weight:700;color:var(--accent)">{acc}%</span>
-          <div style="font-size:0.75rem;color:var(--text2)">{dog.totalSessions} sesiones</div>
+        <div style="text-align:right;flex-shrink:0">
+          <span class="stat-number-mono" style="font-size:1.6rem">{acc}%</span>
+          <div style="font-size:0.72rem;color:var(--text3);letter-spacing:0.02em">{dog.totalSessions} sesiones</div>
         </div>
       </div>
       <div class="progress-bar"><div class="progress-fill" style="width:{acc}%"></div></div>
 
-      <div style="display:flex;gap:16px;margin:12px 0;font-size:0.85rem;color:var(--text2)">
-        <span>✅ {stats.totalHits} aciertos</span>
-        <span>❌ {stats.totalMisses} errores</span>
-        <span>📊 {stats.totalAttempts} intentos</span>
+      <div style="display:flex;gap:20px;margin:12px 0;font-size:0.85rem;color:var(--text3);flex-wrap:wrap">
+        <span>✅ <strong style="color:var(--emerald)">{stats.totalHits}</strong> aciertos</span>
+        <span>❌ <strong style="color:var(--danger)">{stats.totalMisses}</strong> errores</span>
+        <span>📊 <strong style="color:var(--text2)">{stats.totalAttempts}</strong> intentos</span>
       </div>
 
       <Charts {stats} />

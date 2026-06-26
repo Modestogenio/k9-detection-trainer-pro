@@ -21,16 +21,16 @@
               return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
             }),
             datasets: [
-              { label: 'Aciertos', data: stats.weekly.slice(-8).map(w => w.hits), backgroundColor: '#10b981', borderRadius: 4 },
-              { label: 'Errores', data: stats.weekly.slice(-8).map(w => w.misses), backgroundColor: '#ef4444', borderRadius: 4 }
+              { label: 'Aciertos', data: stats.weekly.slice(-8).map(w => w.hits), backgroundColor: 'rgba(16, 185, 129, 0.7)', borderColor: '#10b981', borderWidth: 1, borderRadius: 6 },
+              { label: 'Errores', data: stats.weekly.slice(-8).map(w => w.misses), backgroundColor: 'rgba(239, 68, 68, 0.7)', borderColor: '#ef4444', borderWidth: 1, borderRadius: 6 }
             ]
           },
           options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: '#94a3b8' } } },
+            plugins: { legend: { labels: { color: '#64748b', font: { family: 'Inter' } } } },
             scales: {
-              x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
-              y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' }, beginAtZero: true }
+              x: { ticks: { color: '#64748b', font: { family: 'Inter' } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+              y: { ticks: { color: '#64748b', font: { family: 'Inter' } }, grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: true }
             }
           }
         })
@@ -48,13 +48,16 @@
             labels: stats.byOdor.map(o => o.odor),
             datasets: [{
               data: stats.byOdor.map(o => o.hits + o.misses > 0 ? Math.round((o.hits / (o.hits + o.misses)) * 100) : 0),
-              backgroundColor: ['#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316']
+              backgroundColor: ['rgba(245, 158, 11, 0.8)', 'rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)', 'rgba(239, 68, 68, 0.8)', 'rgba(139, 92, 246, 0.8)', 'rgba(236, 72, 153, 0.8)', 'rgba(20, 184, 166, 0.8)', 'rgba(249, 115, 22, 0.8)'],
+              borderColor: 'transparent',
+              borderRadius: 4
             }]
           },
           options: {
             responsive: true, maintainAspectRatio: false,
+            cutout: '60%',
             plugins: {
-              legend: { position: 'right', labels: { color: '#94a3b8' } }
+              legend: { position: 'right', labels: { color: '#64748b', font: { family: 'Inter' } } }
             }
           }
         })
@@ -67,7 +70,7 @@
   <div class="grid-2" style="margin-bottom:0">
     {#if stats.weekly.length > 0}
       <div>
-        <h3 style="font-size:0.9rem;margin-bottom:8px;color:var(--text2)">📈 Progreso semanal</h3>
+        <h3 style="font-size:0.85rem;margin-bottom:10px;color:var(--text3);font-weight:600;letter-spacing:0.02em;text-transform:uppercase">📈 Progreso semanal</h3>
         <div class="chart-container">
           <canvas bind:this={weeklyCanvas}></canvas>
         </div>
@@ -75,7 +78,7 @@
     {/if}
     {#if stats.byOdor.length > 0}
       <div>
-        <h3 style="font-size:0.9rem;margin-bottom:8px;color:var(--text2)">🎯 Precisión por olor</h3>
+        <h3 style="font-size:0.85rem;margin-bottom:10px;color:var(--text3);font-weight:600;letter-spacing:0.02em;text-transform:uppercase">🎯 Precisión por olor</h3>
         <div class="chart-container">
           <canvas bind:this={odorCanvas}></canvas>
         </div>
